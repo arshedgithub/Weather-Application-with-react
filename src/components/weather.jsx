@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "weather-icons/css/weather-icons.css";
 
-axios.interceptors.response.use(null, (err) => {
-  console.log("error : ", err);
+axios.interceptors.response.use(null, (error) => {
+  if (!error.response) {
+    alert("An unexpected error occured");
+    console.log(error);
+    return;
+  }
+  const { status } = error.response;
+
+  if (status === 404) alert("Enter a valid city name");
+  else if (status >= 400 && status <= 500) alert("Enter a valid city name");
+  else alert("An unexpected error occured");
 });
 
 const Weather = ({ city }) => {
@@ -55,7 +64,6 @@ const Weather = ({ city }) => {
         icon = weatherIcons.Clouds;
     }
     setWeatherIcon(icon);
-    console.log(icon);
   };
 
   const fetchWeather = async () => {
@@ -74,7 +82,6 @@ const Weather = ({ city }) => {
 
         if (!res) return;
         const data = res.data;
-        // const data = res ? res.data : "";
 
         const { name, main, weather, wind, sys } = data;
 
@@ -102,17 +109,25 @@ const Weather = ({ city }) => {
   return (
     <div className="m-auto" style={{ maxWidth: "400px" }}>
       <div className="card-content p-4 bg-primary my-4 rounded mx-2">
-        <h1>
-          {cityName}, {country}
-        </h1>
-        <div className="py-3">
-          <i className={`wi ${weatherIcon} display-1`} />
-        </div>
-        <h4>{weather}</h4>
-        <h1>{temp}&deg;C</h1>
-        <h4>Humidity : {humidity}%</h4>
-        <h6>Average wind Speed : {wind} m/s</h6>
-        <h6>Air pressure : {pressure} Pa</h6>
+        {!cityName ? (
+          <div className="spinner-border my-5 p-2" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          <div>
+            <h1>
+              {cityName}, {country}
+            </h1>
+            <div className="py-3">
+              <i className={`wi ${weatherIcon} display-1`} />
+            </div>
+            <h4>{weather}</h4>
+            <h1>{temp}&deg;C</h1>
+            <h4>Humidity : {humidity}%</h4>
+            <h6>Average wind Speed : {wind} m/s</h6>
+            <h6>Air pressure : {pressure} Pa</h6>)
+          </div>
+        )}
       </div>
     </div>
   );

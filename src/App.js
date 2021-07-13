@@ -9,8 +9,8 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setCity(e.target.city.value);
-    console.log(e.target.city.value);
   }
+
   return (
     <div className="App">
       <Form onSubmit={handleSubmit} />
