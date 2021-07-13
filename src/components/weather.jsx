@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "weather-icons/css/weather-icons.css";
 
+axios.interceptors.response.use(null, (err) => {
+  console.log("error : ", err);
+});
+
 const Weather = ({ city }) => {
   const [lat, setLat] = useState();
   const [lon, setLon] = useState();
@@ -68,8 +72,9 @@ const Weather = ({ city }) => {
           `${process.env.REACT_APP_API_URL}weather?${url}&appid=${process.env.REACT_APP_API_KEY}`
         );
 
-        const data = res ? res.data : "";
-        console.log(cityName);
+        if (!res) return;
+        const data = res.data;
+        // const data = res ? res.data : "";
 
         const { name, main, weather, wind, sys } = data;
 
@@ -100,15 +105,14 @@ const Weather = ({ city }) => {
         <h1>
           {cityName}, {country}
         </h1>
-        <div>
+        <div className="py-3">
           <i className={`wi ${weatherIcon} display-1`} />
         </div>
-        <h3>{weather}</h3>
+        <h4>{weather}</h4>
         <h1>{temp}&deg;C</h1>
-        <h3>Humidity : {humidity}%</h3>
+        <h4>Humidity : {humidity}%</h4>
         <h6>Average wind Speed : {wind} m/s</h6>
         <h6>Air pressure : {pressure} Pa</h6>
-        <h6>{weatherIcon}, icon</h6>
       </div>
     </div>
   );
