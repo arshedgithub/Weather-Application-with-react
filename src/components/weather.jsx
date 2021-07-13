@@ -93,8 +93,6 @@ const Weather = ({ city }) => {
         setHumidity(main.humidity);
         setPressure(main.pressure);
         setWind(wind.speed);
-
-        console.log(data);
       });
       get_WeatherIcon();
     } catch (error) {
@@ -107,28 +105,29 @@ const Weather = ({ city }) => {
   }, [lat, lon, city]);
 
   return (
-    <div className="m-auto" style={{ maxWidth: "400px" }}>
-      <div className="card-content p-4 bg-primary my-4 rounded mx-2">
-        {!cityName ? (
-          <div className="spinner-border my-5 p-2" role="status">
-            <span className="visually-hidden">Loading...</span>
+    <div
+      className="card-content m-auto p-4 my-4 rounded"
+      style={{ maxWidth: "400px" }}
+    >
+      {!cityName ? (
+        <div className="spinner-border my-5 p-2" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      ) : (
+        <div>
+          <h1>
+            {cityName}, {country}
+          </h1>
+          <div className="py-3">
+            <i className={`wi ${weatherIcon} display-1`} />
           </div>
-        ) : (
-          <div>
-            <h1>
-              {cityName}, {country}
-            </h1>
-            <div className="py-3">
-              <i className={`wi ${weatherIcon} display-1`} />
-            </div>
-            <h4>{weather}</h4>
-            <h1>{temp}&deg;C</h1>
-            <h4>Humidity : {humidity}%</h4>
-            <h6>Average wind Speed : {wind} m/s</h6>
-            <h6>Air pressure : {pressure} Pa</h6>)
-          </div>
-        )}
-      </div>
+          <h4>{weather}</h4>
+          <h1>{temp}&deg;C</h1>
+          <h4>Humidity : {humidity}%</h4>
+          <h6>Average Wind Speed : {wind} m/s</h6>
+          <h6>Air Pressure : {pressure} Pa</h6>
+        </div>
+      )}
     </div>
   );
 };

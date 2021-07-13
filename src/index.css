@@ -1,13 +1,41 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  height: 100vh;
+  background-image: url("./assets/img/bg_01.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation-name: change_bg;
+  animation-duration: 15s;
+  animation-delay: 3s;
+  animation-iteration-count: infinite;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.card-content {
+  background-color: rgba(201, 205, 212, 0.9);
+}
+
+@keyframes change_bg {
+  0% {
+    background-image: url("./assets/img/bg_01.jpg");
+  }
+  33% {
+    background-image: url("./assets/img/bg_02.jpg");
+  }
+  66% {
+    background-image: url("./assets/img/bg_03.jpg");
+  }
+  100% {
+    background-image: url("./assets/img/bg_01.jpg");
+  }
 }
