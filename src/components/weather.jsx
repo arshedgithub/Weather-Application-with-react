@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "weather-icons/css/weather-icons.css";
 
-const Weather = ({ cityName }) => {
-  console.log(cityName);
+const Weather = ({ city }) => {
   const [lat, setLat] = useState();
   const [lon, setLon] = useState();
 
-  const [city, setCity] = useState();
+  const [cityName, setCityName] = useState();
   const [country, setCountry] = useState();
   const [temp, setTemp] = useState();
   const [humidity, setHumidity] = useState();
@@ -61,15 +60,21 @@ const Weather = ({ cityName }) => {
         setLat(position.coords.latitude);
         setLon(position.coords.longitude);
 
+        const url = city
+          ? `q=${city}`
+          : `lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
+
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_API_KEY}`
+          `${process.env.REACT_APP_API_URL}weather?${url}&appid=${process.env.REACT_APP_API_KEY}`
         );
+
         const data = res ? res.data : "";
+        console.log(cityName);
 
         const { name, main, weather, wind, sys } = data;
 
         setWeatherId(weather[0].id);
-        setCity(name);
+        setCityName(name);
         setCountry(sys.country);
         setWeather(weather[0].description);
         setTemp(Math.round(main.temp - 273.15));
@@ -93,7 +98,7 @@ const Weather = ({ cityName }) => {
     <div className="m-auto" style={{ maxWidth: "400px" }}>
       <div className="card-content p-4 bg-primary my-4 rounded mx-2">
         <h1>
-          {city}, {country}
+          {cityName}, {country}
         </h1>
         <div>
           <i className={`wi ${weatherIcon} display-1`} />

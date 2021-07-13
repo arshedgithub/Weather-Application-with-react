@@ -6,13 +6,14 @@ import { useState } from 'react';
 function App() {
   const [city, setCity] = useState();
 
-  const getCityName = (city) => {
-    setCity(city)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCity(e.target.city.value);
+    console.log(e.target.city.value);
   }
-
   return (
     <div className="App">
-      <Form getCity={getCityName} />
+      <Form onSubmit={handleSubmit} />
       <Weather city={city} />
     </div>
   );

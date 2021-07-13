@@ -1,16 +1,17 @@
 import React from "react";
 
-const Form = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.city.value);
-  };
+const Form = ({ onSubmit }) => {
+  //   const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     console.log(e.target.city.value);
+  //     // onGetCity(e.target.city.value);
+  //   };
   return (
-    <form className="my-3" onSubmit={handleSubmit}>
+    <form className="my-3" onSubmit={onSubmit}>
       <input
         type="text"
         className="px-2"
-        placeholder="seacch city"
+        placeholder="seach city"
         name="city"
         autoComplete="off"
       />
