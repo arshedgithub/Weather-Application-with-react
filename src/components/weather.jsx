@@ -15,7 +15,7 @@ axios.interceptors.response.use(null, (error) => {
   else alert("An unexpected error occured");
 });
 
-const Weather = ({ city }) => {
+const Weather = ({ city, onLocErr }) => {
   const [lat, setLat] = useState();
   const [lon, setLon] = useState();
 
@@ -28,6 +28,7 @@ const Weather = ({ city }) => {
   const [wind, setWind] = useState();
   const [weatherId, setWeatherId] = useState();
   const [weatherIcon, setWeatherIcon] = useState();
+  const [geolocationErr, setGeolocationErr] = useState();
 
   const weatherIcons = {
     Thunderstorm: "wi-thunderstorm",
@@ -68,32 +69,52 @@ const Weather = ({ city }) => {
 
   const fetchWeather = async () => {
     try {
-      navigator.geolocation.getCurrentPosition(async function (position) {
-        setLat(position.coords.latitude);
-        setLon(position.coords.longitude);
+      navigator.geolocation.getCurrentPosition(
+        async function (position) {
+          setLat(position.coords.latitude);
+          setLon(position.coords.longitude);
 
-        const url = city
-          ? `q=${city}`
-          : `lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
+          const url = city
+            ? `q=${city}`
+            : `lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
 
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}weather?${url}&appid=${process.env.REACT_APP_API_KEY}`
-        );
+          const res = await axios.get(
+            `${process.env.REACT_APP_API_URL}weather?${url}&appid=${process.env.REACT_APP_API_KEY}`
+          );
 
-        if (!res) return;
-        const data = res.data;
+          if (!res) return;
+          const data = res.data;
 
-        const { name, main, weather, wind, sys } = data;
+          const { name, main, weather, wind, sys } = data;
 
-        setWeatherId(weather[0].id);
-        setCityName(name);
-        setCountry(sys.country);
-        setWeather(weather[0].description);
-        setTemp(Math.round(main.temp - 273.15));
-        setHumidity(main.humidity);
-        setPressure(main.pressure);
-        setWind(wind.speed);
-      });
+          setWeatherId(weather[0].id);
+          setCityName(name);
+          setCountry(sys.country);
+          setWeather(weather[0].description);
+          setTemp(Math.round(main.temp - 273.15));
+          setHumidity(main.humidity);
+          setPressure(main.pressure);
+          setWind(wind.speed);
+        },
+        (err) => {
+          if (!err.code) return;
+          onLocErr();
+          let errLoc;
+          switch (err.code) {
+            case 1:
+              errLoc =
+                "You should allow this site to access your Location, And refresh the page";
+              break;
+            case 2:
+              errLoc = "Location Unavailable";
+              break;
+            default:
+              errLoc = "Searching Timeout";
+              break;
+          }
+          setGeolocationErr(errLoc);
+        }
+      );
       get_WeatherIcon();
     } catch (error) {
       console.log(error);
@@ -110,8 +131,14 @@ const Weather = ({ city }) => {
       style={{ maxWidth: "400px" }}
     >
       {!cityName ? (
-        <div className="spinner-border my-5 p-2" role="status">
-          <span className="visually-hidden">Loading...</span>
+        <div>
+          {!geolocationErr ? (
+            <div className="spinner-border my-5 p-2" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            <h4 className="py-5 text-danger m-5">{geolocationErr}</h4>
+          )}
         </div>
       ) : (
         <div>

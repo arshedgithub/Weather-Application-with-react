@@ -1,11 +1,7 @@
 import React from "react";
 
-const Form = ({ onSubmit }) => {
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     console.log(e.target.city.value);
-  //     // onGetCity(e.target.city.value);
-  //   };
+const Form = ({ onSubmit, loc }) => {
+  if (loc) return null;
   return (
     <form className="my-3" onSubmit={onSubmit}>
       <input
