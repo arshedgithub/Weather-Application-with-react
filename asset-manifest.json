@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/Weather-Application-with-react/static/css/main.497c9a64.chunk.css",
-    "main.js": "/Weather-Application-with-react/static/js/main.b6d649ae.chunk.js",
-    "main.js.map": "/Weather-Application-with-react/static/js/main.b6d649ae.chunk.js.map",
+    "main.js": "/Weather-Application-with-react/static/js/main.180686b5.chunk.js",
+    "main.js.map": "/Weather-Application-with-react/static/js/main.180686b5.chunk.js.map",
     "runtime-main.js": "/Weather-Application-with-react/static/js/runtime-main.b40091a8.js",
     "runtime-main.js.map": "/Weather-Application-with-react/static/js/runtime-main.b40091a8.js.map",
     "static/css/2.64482ed3.chunk.css": "/Weather-Application-with-react/static/css/2.64482ed3.chunk.css",
-    "static/js/2.54c940c1.chunk.js": "/Weather-Application-with-react/static/js/2.54c940c1.chunk.js",
-    "static/js/2.54c940c1.chunk.js.map": "/Weather-Application-with-react/static/js/2.54c940c1.chunk.js.map",
+    "static/js/2.02148ca5.chunk.js": "/Weather-Application-with-react/static/js/2.02148ca5.chunk.js",
+    "static/js/2.02148ca5.chunk.js.map": "/Weather-Application-with-react/static/js/2.02148ca5.chunk.js.map",
     "static/js/3.df916bba.chunk.js": "/Weather-Application-with-react/static/js/3.df916bba.chunk.js",
     "static/js/3.df916bba.chunk.js.map": "/Weather-Application-with-react/static/js/3.df916bba.chunk.js.map",
     "index.html": "/Weather-Application-with-react/index.html",
     "static/css/2.64482ed3.chunk.css.map": "/Weather-Application-with-react/static/css/2.64482ed3.chunk.css.map",
     "static/css/main.497c9a64.chunk.css.map": "/Weather-Application-with-react/static/css/main.497c9a64.chunk.css.map",
-    "static/js/2.54c940c1.chunk.js.LICENSE.txt": "/Weather-Application-with-react/static/js/2.54c940c1.chunk.js.LICENSE.txt",
+    "static/js/2.02148ca5.chunk.js.LICENSE.txt": "/Weather-Application-with-react/static/js/2.02148ca5.chunk.js.LICENSE.txt",
     "static/media/index.css": "/Weather-Application-with-react/static/media/bg_03.a3440ee9.jpg",
     "static/media/weather-icons.css": "/Weather-Application-with-react/static/media/weathericons-regular-webfont.e218aee6.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.b40091a8.js",
     "static/css/2.64482ed3.chunk.css",
-    "static/js/2.54c940c1.chunk.js",
+    "static/js/2.02148ca5.chunk.js",
     "static/css/main.497c9a64.chunk.css",
-    "static/js/main.b6d649ae.chunk.js"
+    "static/js/main.180686b5.chunk.js"
   ]
 }
