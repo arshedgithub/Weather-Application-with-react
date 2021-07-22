@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "weather-icons/css/weather-icons.css";
-
-axios.interceptors.response.use(null, (error) => {
-  if (!error.response) {
-    alert("An unexpected error occured");
-    console.log(error);
-    return;
-  }
-  const { status } = error.response;
-
-  if (status === 404) alert("Enter a valid city name");
-  else if (status >= 400 && status <= 500) alert("Enter a valid city name");
-  else alert("An unexpected error occured");
-});
+import http from "../services/httpService.js";
 
 const Weather = ({ city, onLocErr }) => {
   const [lat, setLat] = useState();
@@ -78,7 +65,7 @@ const Weather = ({ city, onLocErr }) => {
             ? `q=${city}`
             : `lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
 
-          const res = await axios.get(
+          const res = await http.get(
             `${process.env.REACT_APP_API_URL}weather?${url}&appid=${process.env.REACT_APP_API_KEY}`
           );
 
